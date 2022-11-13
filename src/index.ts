@@ -6,20 +6,27 @@ import { chalkLogger } from "./utils/logger";
 const logger = chalkLogger();
 
 const main = async () => {
-	const args = argv.option([
-		{
-			name: "directusURL",
-			short: "u",
-			type: "string",
-		},
-		{
-			name: "directusToken",
-			short: "t",
-			type: "string",
-		},
-	]).run();
+	const args = argv
+		.option([
+			{
+				name: "directusURL",
+				short: "u",
+				type: "string",
+			},
+			{
+				name: "directusToken",
+				short: "t",
+				type: "string",
+			},
+			{
+				name: "outputPath",
+				short: "o",
+				type: "string",
+			},
+		])
+		.run();
 
-	const [directusURL, directusToken ] = args.targets;
+	const [directusURL, directusToken, outputPath] = args.targets;
 	if (!directusURL) {
 		logger.error("❌ directusURL is required (-u) ");
 		return process.exit(1);
@@ -29,10 +36,8 @@ const main = async () => {
 	}
 	const directus = new Directus(directusURL, directusToken);
 	await directus.testToken();
-	const types = await directus.generateFile();
+	const types = await directus.generateFile(outputPath);
 	logger.info("✅ Done");
 };
 
 main();
-
- 

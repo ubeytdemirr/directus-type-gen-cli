@@ -148,12 +148,9 @@ export class Directus {
 
 		return ret;
 	}
-	async generateFile(
-		useIntersectionTypes = false,
-		path = "./directus-types.ts",
-	) {
+	async generateFile(path = "./directus-types.ts") {
 		logger.info("🚀 Generating types...");
-		const types = await this.generate(useIntersectionTypes);
+		const types = await this.generate(false);
 		logger.info("🚀 Writing types to file...");
 		fs.writeFileSync(path, types);
 		return types;
