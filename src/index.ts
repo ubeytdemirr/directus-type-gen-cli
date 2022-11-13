@@ -35,7 +35,4 @@ const main = async () => {
 
 main();
 
-// const directus = new Directus(
-// 	"http://localhost:8055",
-// 	"Q9_3_z5GqoOo7C-XSAnZNWjeLTfXhH9S",
-// );
+ 
